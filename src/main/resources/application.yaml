@@ -8,5 +8,6 @@ springdoc:
   paths-to-match: /api/v1/**, /v1/**
 
 page:
-  url: http://www.shiba-pedigree.ru/details.php?id=79238
+  url: 'http://www.shiba-pedigree.ru/'
+  ichiro-profile: 'details.php?id=79238'
   selector: '#pedigree > tbody'
