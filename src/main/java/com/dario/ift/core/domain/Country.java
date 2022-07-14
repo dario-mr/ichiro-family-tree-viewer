@@ -12,6 +12,8 @@ public enum Country {
     CA("Canada"),
     JP("Japan"),
     NL("Netherlands"),
+    DE("Germany"),
+    UA("Ukraine"),
     AU("Australia");
 
     @Getter

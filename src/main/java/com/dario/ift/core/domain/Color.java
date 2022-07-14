@@ -6,7 +6,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Color {
 
-    RED("Red");
+    RED("Red"),
+    SESAME("Sesame"),
+    BLACK("Black");
 
     @Getter
     private final String value;
