@@ -17,13 +17,13 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching
 public class CacheConfig {
 
-    public static final String DOWNLOAD_UP_TO_GENERATION = "downloadUpToGeneration";
+    public static final String GET_FAMILY_TREE = "getFamilyTree";
 
     @Bean
     public CacheManager cacheManager(Ticker ticker) {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         cacheManager.setCaches(List.of(
-                new CaffeineCache(DOWNLOAD_UP_TO_GENERATION, buildCache(ticker, 10, 1))
+                new CaffeineCache(GET_FAMILY_TREE, buildCache(ticker, 1, 24))
         ));
 
         return cacheManager;

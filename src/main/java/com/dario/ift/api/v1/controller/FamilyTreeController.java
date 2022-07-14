@@ -1,7 +1,8 @@
 package com.dario.ift.api.v1.controller;
 
-import com.dario.ift.core.domain.Dog;
+import com.dario.ift.api.v1.controller.dto.DogDto;
 import com.dario.ift.core.service.FamilyTreeService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.util.List;
 
 import static com.dario.ift.api.v1.controller.FamilyTreeController.BASE_PATH;
 import static com.dario.ift.api.v1.controller.FamilyTreeController.VERSION;
@@ -32,17 +32,17 @@ public class FamilyTreeController {
     static final String GET_FAMILY_TREE_ENDPOINT = "family-tree/generations/{generations}";
 
     private final FamilyTreeService familyTreeService;
+    private final ObjectMapper objectMapper;
 
     @GetMapping(path = GET_FAMILY_TREE_ENDPOINT)
     @Operation(summary = "Returns Ichiro's family tree up to the amount of generations specified")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Family tree successfully generated"),
+            @ApiResponse(responseCode = "200", description = "Family tree successfully retrieved"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
-            @ApiResponse(responseCode = "406", description = "Something went wrong during the family tree generation"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
-    public List<Dog> getFamilyTree(@PathVariable @Min(2) @Max(8) Integer generations) {
-        return familyTreeService.buildFamilyTree(generations);
+    public DogDto getFamilyTree(@PathVariable @Min(2) @Max(8) int generations) {
+        return objectMapper.convertValue(familyTreeService.getFamilyTree(generations), DogDto.class);
     }
 
 }
