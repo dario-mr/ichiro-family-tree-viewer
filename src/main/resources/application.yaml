@@ -4,6 +4,10 @@ spring:
 server:
   port: 5000
 
+api.key:
+  header: api-key
+  value: 09b83828-6cc7-4a48-a1d1-ba4d518038c7
+
 springdoc:
   swagger-ui.path: swagger-ui
   api-docs.path: /${spring.application.name}

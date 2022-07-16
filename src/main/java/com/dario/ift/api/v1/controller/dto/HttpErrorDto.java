@@ -5,7 +5,9 @@ import lombok.Value;
 
 @Value
 @RequiredArgsConstructor
-public class ErrorDto {
-    String message;
-    String cause;
+public class HttpErrorDto {
+    String timestamp;
+    String status;
+    String error;
+    String path;
 }
