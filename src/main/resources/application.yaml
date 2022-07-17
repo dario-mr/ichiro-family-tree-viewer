@@ -1,7 +1,7 @@
 spring:
   application:
     name: ichiro-family-tree
-server.port: ${PORT:8080}
+server.port: ${PORT:8080} # use port set by Heroku, otherwise 8080
 
 api.key:
   header: api-key

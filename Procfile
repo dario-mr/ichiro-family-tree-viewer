@@ -1,1 +1,1 @@
-web: java -jar target/ichiro-family-tree-0.0.1.jar --server.port=$PORT
+web: java -jar target/ichiro-family-tree-0.0.1.jar
