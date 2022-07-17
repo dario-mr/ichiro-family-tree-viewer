@@ -20,6 +20,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        // require API key for all requests to /api/**
         ApiKeyAuthFilter filter = new ApiKeyAuthFilter(apiKeyHeader);
         filter.setAuthenticationManager(authentication -> {
             String principal = (String) authentication.getPrincipal();
@@ -35,6 +36,11 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                 csrf().disable().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
                 and().addFilter(filter).authorizeRequests().anyRequest().authenticated();
+
+        // enable https
+        httpSecurity.requiresChannel()
+                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+                .requiresSecure();
     }
 
 }
