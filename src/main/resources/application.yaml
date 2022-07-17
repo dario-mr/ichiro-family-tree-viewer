@@ -1,8 +1,7 @@
 spring:
   application:
     name: ichiro-family-tree
-server:
-  port: 5000
+server.port: ${PORT:8080}
 
 api.key:
   header: api-key
