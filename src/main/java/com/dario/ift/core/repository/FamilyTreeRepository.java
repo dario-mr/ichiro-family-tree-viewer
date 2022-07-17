@@ -4,12 +4,10 @@ import com.dario.ift.core.domain.Color;
 import com.dario.ift.core.domain.Country;
 import com.dario.ift.core.domain.Dog;
 import com.dario.ift.core.domain.Gender;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 
-import static com.dario.ift.config.CacheConfig.GET_FAMILY_TREE;
 import static com.dario.ift.core.domain.Color.*;
 import static com.dario.ift.core.domain.Country.*;
 import static com.dario.ift.core.domain.Gender.F;
@@ -18,8 +16,8 @@ import static com.dario.ift.core.domain.Gender.M;
 @Repository
 public class FamilyTreeRepository {
 
-    @Cacheable(GET_FAMILY_TREE)
-    public Dog getFamilyTree() { // TODO currently up to generation 6...
+    // TODO currently up to generation 6...
+    public Dog getFamilyTree() {
         return buildDog(1, "Ichiro Go Takimisou", M, RED, RU, LocalDate.of(2021, 10, 14), "", "http://www.shiba-pedigree.ru/details.php?id=79238",
                 buildDog(2, "Triumf Sibiri W'vip Go Takimisou", M, RED, RU, LocalDate.of(2018, 4, 29), "http://www.shiba-pedigree.ru/pics/medium/2554/med_5ce5526a54e75.JPG", "http://www.shiba-pedigree.ru/details.php?id=72439",
                         buildDog(3, "Hikay's Takes The Lead", M, RED, RU, LocalDate.of(2016, 8, 16), "http://www.shiba-pedigree.ru/pics/medium/2581/med_5901bac984d1a.jpg", "http://www.shiba-pedigree.ru/details.php?id=70124",
@@ -101,4 +99,5 @@ public class FamilyTreeRepository {
                 .father(father)
                 .build();
     }
+
 }
