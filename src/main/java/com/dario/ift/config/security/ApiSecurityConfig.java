@@ -20,7 +20,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // require API key for all requests to /api/**
+        // require API key header for all requests to '/api/**'
         ApiKeyAuthFilter filter = new ApiKeyAuthFilter(apiKeyHeader);
         filter.setAuthenticationManager(authentication -> {
             String principal = (String) authentication.getPrincipal();
@@ -37,7 +37,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
                 and().addFilter(filter).authorizeRequests().anyRequest().authenticated();
 
-        // enable https on Heroku deployment
+        // redirect all requests to https if 'X-Forwarded-Proto' header is set by Heroku
         httpSecurity.requiresChannel()
                 .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
                 .requiresSecure();
