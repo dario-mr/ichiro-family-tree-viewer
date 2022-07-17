@@ -1,19 +1,13 @@
 spring:
-  application:
-    name: ichiro-family-tree
-server:
-  port: 5000
-
-api.key:
-  header: api-key
-  value: 09b83828-6cc7-4a48-a1d1-ba4d518038c7
+  application.name: ichiro-family-tree
+  config.import: optional:file:.env[.properties] # enable scanning of .env file for environment variables
+server.port: ${PORT:8080} # use PORT set by Heroku, otherwise 8080
 
 springdoc:
   swagger-ui.path: swagger-ui
   api-docs.path: /${spring.application.name}
-  paths-to-match: /api/v1/**, /v1/**
+  paths-to-match: /api/**
 
-page:
-  url: 'http://www.shiba-pedigree.ru/'
-  ichiro-profile: 'details.php?id=79238'
-  selector: '#pedigree > tbody'
+api.key:
+  header: api-key
+  value: ${API_KEY}
