@@ -1,0 +1,1 @@
+web: java -jar target/ichiro-family-tree-0.0.1.jar
