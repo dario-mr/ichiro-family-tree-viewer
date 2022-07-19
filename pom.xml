@@ -12,13 +12,14 @@
 
     <groupId>com.dario</groupId>
     <artifactId>ichiro-family-tree</artifactId>
-    <version>0.0.1</version>
+    <version>${project.version}</version>
 
     <name>Ichiro Family Tree</name>
     <description>API that returns the family tree of our doggy Ichiro Go Takimisou</description>
 
     <properties>
         <java.version>11</java.version>
+        <project.version>0.0.2</project.version>
 
         <springdoc.version>1.6.9</springdoc.version>
     </properties>
