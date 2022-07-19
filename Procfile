@@ -1,1 +1,1 @@
-web: java -jar target/ichiro-family-tree-0.0.2.jar
+web: java -jar target/ichiro-family-tree-0.0.3.jar
