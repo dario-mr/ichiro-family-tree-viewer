@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Builder
 @Data
 public class Dog {
+
     String name;
     String gender;
     String country;
