@@ -1,1 +1,1 @@
-web: java -jar target/ichiro-family-tree-0.0.3.jar
+web: java $JAVA_OPTS -jar target/*.jar
