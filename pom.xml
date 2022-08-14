@@ -12,7 +12,7 @@
 
     <groupId>com.dario</groupId>
     <artifactId>ichiro-family-tree-viewer</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
     <name>Ichiro Family Tree Viewer</name>
     <description></description>
