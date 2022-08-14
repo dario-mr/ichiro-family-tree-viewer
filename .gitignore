@@ -5,3 +5,4 @@
 .project
 .settings
 .env
+node_modules

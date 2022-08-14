@@ -2,12 +2,3 @@ spring:
   application.name: ichiro-family-tree-viewer
   config.import: optional:file:.env[.properties] # enable scanning of .env file for environment variables
 server.port: ${PORT:8080} # use PORT set by Heroku, otherwise 8080
-
-springdoc:
-  swagger-ui.path: swagger-ui
-  api-docs.path: /${spring.application.name}
-  paths-to-match: /api/**
-
-api.key:
-  header: api-key
-  value: ${API_KEY}
