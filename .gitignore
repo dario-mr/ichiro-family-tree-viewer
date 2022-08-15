@@ -5,12 +5,8 @@
 .project
 .settings
 .env
-node_modules
+node_modules/
 frontend/
 
-/package.json
-/package-lock.json
 /webpack.config.js
 /webpack.generated.js
-/tsconfig.json
-/types.d.ts
