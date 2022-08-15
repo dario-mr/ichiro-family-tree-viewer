@@ -38,7 +38,6 @@ public class CustomerEditor extends VerticalLayout implements KeyNotifier {
     TextField lastName = new TextField("Last name");
 
     /* Action buttons */
-    // TODO why more code?
     Button save = new Button("Save", VaadinIcon.CHECK.create());
     Button cancel = new Button("Cancel");
     Button delete = new Button("Delete", VaadinIcon.TRASH.create());

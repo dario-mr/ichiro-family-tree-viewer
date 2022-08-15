@@ -12,21 +12,25 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
+import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
+
 @Route
+@RequiredArgsConstructor
 public class MainView extends VerticalLayout {
 
     private final CustomerRepository repo;
+    private final CustomerEditor editor;
+    private final FamilyTreeGateway familyTreeGateway;
 
-    final Grid<CustomerEntity> grid;
-    final TextField filter;
+    private final Grid<CustomerEntity> grid = new Grid<>(CustomerEntity.class);
 
-    public MainView(CustomerRepository repo, CustomerEditor editor, FamilyTreeGateway familyTreeGateway) {
-        this.repo = repo;
-        this.grid = new Grid<>(CustomerEntity.class);
-        this.filter = new TextField();
+    @PostConstruct
+    public void init() {
         Button addNewBtn = new Button("New customer", VaadinIcon.PLUS.create());
+        TextField filter = new TextField();
 
         Dog dog = familyTreeGateway.getFamilyTree(5);
 
