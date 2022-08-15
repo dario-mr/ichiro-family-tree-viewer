@@ -1,13 +1,12 @@
 # This workflow will build a package using Maven and then publish it to GitHub packages
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
 
-name: Maven Package
+name: Build and Package
 
 on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -20,6 +19,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+        cache: 'maven'
         server-id: github
         settings-path: ${{ github.workspace }}
 
