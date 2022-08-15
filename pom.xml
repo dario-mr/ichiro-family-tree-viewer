@@ -6,20 +6,20 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.2</version>
         <relativePath/>
     </parent>
 
     <groupId>com.dario</groupId>
     <artifactId>ichiro-family-tree-viewer</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <name>Ichiro Family Tree Viewer</name>
     <description></description>
 
     <properties>
         <java.version>11</java.version>
-        <vaadin.version>14.8.0</vaadin.version>
+        <vaadin.version>23.1.6</vaadin.version>
     </properties>
 
     <dependencies>
@@ -40,10 +40,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!-- enable live reload of java classes -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- third parties -->
@@ -54,6 +55,11 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- test -->
