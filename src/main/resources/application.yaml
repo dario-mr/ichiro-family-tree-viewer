@@ -2,3 +2,7 @@ spring:
   application.name: ichiro-family-tree-viewer
   config.import: optional:file:.env[.properties] # enable scanning of .env file for environment variables
 server.port: ${PORT:8080} # use PORT set by Heroku, otherwise 8080
+
+family-tree.api:
+  url: https://ichiro-family-tree.herokuapp.com
+  key: ${FAMILY_TREE_API_KEY}
