@@ -3,7 +3,7 @@ package com.dario.iftv.proxy.familytree;
 import com.dario.iftv.core.domain.Dog;
 import com.dario.iftv.core.gateway.FamilyTreeGateway;
 import com.dario.iftv.proxy.familytree.dto.DogDto;
-import com.dario.iftv.proxy.familytree.excpetion.FamilyTreeException;
+import com.dario.iftv.proxy.familytree.exception.FamilyTreeException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +30,7 @@ public class FamilyTreeProxy implements FamilyTreeGateway {
     @Value("${family-tree.api.key}")
     private String apiKey;
 
+    // TODO add cache
     public Dog getFamilyTree(int generations) {
         try {
             DogDto dog = restTemplate.exchange(url, GET, createRequest(), DogDto.class, generations).getBody();

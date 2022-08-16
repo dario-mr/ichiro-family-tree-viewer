@@ -1,4 +1,4 @@
-package com.dario.iftv.proxy.familytree.excpetion;
+package com.dario.iftv.proxy.familytree.exception;
 
 public class FamilyTreeException extends RuntimeException {
 

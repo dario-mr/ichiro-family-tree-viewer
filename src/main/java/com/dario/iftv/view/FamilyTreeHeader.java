@@ -11,6 +11,7 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 
 import java.util.List;
+import java.util.function.Function;
 
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.END;
@@ -18,12 +19,12 @@ import static java.lang.Integer.MAX_VALUE;
 
 public class FamilyTreeHeader extends VerticalLayout implements KeyNotifier {
 
-    public FamilyTreeHeader(TreeGrid<Dog> dogTree, List<Dog> rootDog) {
+    public FamilyTreeHeader(TreeGrid<Dog> dogGrid, List<Dog> rootDog, Function<Integer, Void> updateTreeFunction) {
         // title
         H3 title = new H3("Ichiro Family Tree");
         title.getStyle().set("margin", "0");
 
-        // generations
+        // generations input field
         Label generationsLabel = new Label("Generations");
         IntegerField generationsInput = new IntegerField();
         generationsInput.setMin(2);
@@ -31,16 +32,16 @@ public class FamilyTreeHeader extends VerticalLayout implements KeyNotifier {
         generationsInput.setValue(5);
         generationsInput.setHasControls(true);
         generationsInput.addValueChangeListener(event -> {
-            event.getValue();
+            updateTreeFunction.apply(event.getValue());
         });
         HorizontalLayout generationsLayout = new HorizontalLayout(generationsLabel, generationsInput);
         generationsLayout.setAlignItems(CENTER);
 
         // expand and collapse buttons
         Button expand = new Button("Expand All");
-        expand.addClickListener(event -> dogTree.expandRecursively(rootDog, MAX_VALUE));
+        expand.addClickListener(event -> dogGrid.expandRecursively(rootDog, MAX_VALUE));
         Button collapse = new Button("Collapse All");
-        collapse.addClickListener(event -> dogTree.collapseRecursively(rootDog, MAX_VALUE));
+        collapse.addClickListener(event -> dogGrid.collapseRecursively(rootDog, MAX_VALUE));
         HorizontalLayout buttonsLayout = new HorizontalLayout(expand, collapse);
         buttonsLayout.setAlignSelf(END);
 

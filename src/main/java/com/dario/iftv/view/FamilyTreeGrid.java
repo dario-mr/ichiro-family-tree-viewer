@@ -8,19 +8,19 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.treegrid.TreeGrid;
+import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
-import static java.util.Collections.emptyList;
 
+@Component
 public class FamilyTreeGrid extends TreeGrid<Dog> {
 
-    public FamilyTreeGrid(List<Dog> rootDog) {
-        setItems(rootDog, this::getParents);
-
+    public FamilyTreeGrid() {
         addComponentHierarchyColumn(dog -> {
             Avatar avatar = new Avatar();
             avatar.setName(dog.getName());
@@ -53,13 +53,11 @@ public class FamilyTreeGrid extends TreeGrid<Dog> {
         addColumn(Dog::getColor).setHeader("Color");
     }
 
-    private List<Dog> getParents(Dog dog) {
-        if (dog.getFather() == null || dog.getMother() == null) {
-            return emptyList();
-        }
-        return List.of(dog.getFather(), dog.getMother());
+    public void setRootDog(List<Dog> rootDog) {
+        setItems(rootDog, Dog::getParents);
     }
 
+    // TODO use custom icons
     private Icon createIconByGender(String gender) {
         return gender.equals("Male")
                 ? createIcon(VaadinIcon.MALE)

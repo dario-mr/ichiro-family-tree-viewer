@@ -5,26 +5,37 @@ import com.dario.iftv.core.gateway.FamilyTreeGateway;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Collections.singletonList;
+import java.util.function.Function;
 
 @Route
 @RequiredArgsConstructor
+@Slf4j
 public class MainView extends VerticalLayout {
 
     private final FamilyTreeGateway familyTreeGateway;
+    private final FamilyTreeGrid grid;
+
+    private final List<Dog> rootDog = new ArrayList<>();
 
     @PostConstruct
     public void init() {
         setHeightFull();
-        List<Dog> rootDog = singletonList(familyTreeGateway.getFamilyTree(5));
+        rootDog.add(familyTreeGateway.getFamilyTree(5));
 
-        FamilyTreeGrid grid = new FamilyTreeGrid(rootDog);
-        FamilyTreeHeader header = new FamilyTreeHeader(grid, rootDog);
-        // TODO add event on generations click
+        grid.setRootDog(rootDog);
+
+        Function<Integer, Void> updateTreeFunction = generations -> {
+            rootDog.clear();
+            rootDog.add(familyTreeGateway.getFamilyTree(generations));
+            grid.setRootDog(rootDog);
+            return null;
+        };
+        FamilyTreeHeader header = new FamilyTreeHeader(grid, rootDog, updateTreeFunction);
 
         add(header, grid);
     }
