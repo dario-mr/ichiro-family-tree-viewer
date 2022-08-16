@@ -1,29 +1,17 @@
 package com.dario.iftv;
 
-import com.dario.iftv.repository.jpa.CustomerRepository;
-import com.dario.iftv.repository.jpa.entity.CustomerEntity;
-import org.springframework.boot.CommandLineRunner;
+import com.vaadin.flow.component.page.AppShellConfigurator;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class Application {
+@Theme(themeClass = Lumo.class, variant = Lumo.DARK)
+public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
-    }
-
-    @Bean
-    public CommandLineRunner loadData(CustomerRepository repository) {
-        return (args) -> {
-            // save a couple of customers
-            repository.save(new CustomerEntity("Jack", "Bauer"));
-            repository.save(new CustomerEntity("Chloe", "O'Brian"));
-            repository.save(new CustomerEntity("Kim", "Bauer"));
-            repository.save(new CustomerEntity("David", "Palmer"));
-            repository.save(new CustomerEntity("Michelle", "Dessler"));
-        };
     }
 
 }
