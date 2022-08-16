@@ -18,7 +18,6 @@ import java.util.function.Function;
 public class MainView extends VerticalLayout {
 
     private final FamilyTreeGateway familyTreeGateway;
-    private final FamilyTreeGrid grid;
 
     private final List<Dog> rootDog = new ArrayList<>();
 
@@ -27,9 +26,11 @@ public class MainView extends VerticalLayout {
         setHeightFull();
         rootDog.add(familyTreeGateway.getFamilyTree(5));
 
+        FamilyTreeGrid grid = new FamilyTreeGrid();
         grid.setRootDog(rootDog);
 
         Function<Integer, Void> updateTreeFunction = generations -> {
+            // TODO use DataProvider
             rootDog.clear();
             rootDog.add(familyTreeGateway.getFamilyTree(generations));
             grid.setRootDog(rootDog);
