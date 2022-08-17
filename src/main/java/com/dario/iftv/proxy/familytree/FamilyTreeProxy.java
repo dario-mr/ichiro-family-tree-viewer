@@ -7,6 +7,7 @@ import com.dario.iftv.proxy.familytree.exception.FamilyTreeException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import static com.dario.iftv.config.CacheConfig.GET_FAMILY_TREE;
 import static java.lang.String.format;
 import static org.springframework.http.HttpMethod.GET;
 
@@ -30,7 +32,7 @@ public class FamilyTreeProxy implements FamilyTreeGateway {
     @Value("${family-tree.api.key}")
     private String apiKey;
 
-    // TODO add cache
+    @Cacheable(GET_FAMILY_TREE)
     public Dog getFamilyTree(int generations) {
         try {
             DogDto dog = restTemplate.exchange(url, GET, createRequest(), DogDto.class, generations).getBody();

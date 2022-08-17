@@ -6,7 +6,8 @@
 .settings
 .env
 node_modules/
-frontend/
+frontend/generated/
+frontend/index.html
 
 /package-lock.json
 /webpack.config.js

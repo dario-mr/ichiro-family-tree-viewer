@@ -1,7 +1,6 @@
 package com.dario.iftv.view;
 
 import com.dario.iftv.core.domain.Dog;
-import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Label;
@@ -9,17 +8,17 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.treegrid.TreeGrid;
+import com.vaadin.flow.data.provider.hierarchy.TreeDataProvider;
 
 import java.util.List;
 import java.util.function.Function;
 
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
-import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.END;
 import static java.lang.Integer.MAX_VALUE;
 
-public class FamilyTreeHeader extends VerticalLayout implements KeyNotifier {
+public class FamilyTreeHeader extends VerticalLayout {
 
-    public FamilyTreeHeader(TreeGrid<Dog> dogGrid, List<Dog> rootDog, Function<Integer, Void> updateTreeFunction) {
+    public FamilyTreeHeader(TreeGrid<Dog> dogGrid, Function<Integer, Void> updateTreeFunction) {
         // title
         H3 title = new H3("Ichiro Family Tree");
         title.getStyle().set("margin", "0");
@@ -39,16 +38,23 @@ public class FamilyTreeHeader extends VerticalLayout implements KeyNotifier {
 
         // expand and collapse buttons
         Button expand = new Button("Expand All");
-        expand.addClickListener(event -> dogGrid.expandRecursively(rootDog, MAX_VALUE));
+        expand.addClickListener(event -> {
+            dogGrid.expandRecursively(getRootDog(dogGrid), MAX_VALUE);
+        });
         Button collapse = new Button("Collapse All");
-        collapse.addClickListener(event -> dogGrid.collapseRecursively(rootDog, MAX_VALUE));
+        collapse.addClickListener(event -> {
+            dogGrid.collapseRecursively(getRootDog(dogGrid), MAX_VALUE);
+        });
         HorizontalLayout buttonsLayout = new HorizontalLayout(expand, collapse);
-        buttonsLayout.setAlignSelf(END);
 
         HorizontalLayout row = new HorizontalLayout(generationsLayout, buttonsLayout);
 
         add(title, row);
         setPadding(false);
+    }
+
+    private static List<Dog> getRootDog(TreeGrid<Dog> dogGrid) {
+        return ((TreeDataProvider<Dog>) dogGrid.getDataProvider()).getTreeData().getRootItems();
     }
 
 }
