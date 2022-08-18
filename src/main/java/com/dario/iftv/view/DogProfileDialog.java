@@ -2,6 +2,7 @@ package com.dario.iftv.view;
 
 import com.dario.iftv.core.domain.Dog;
 import com.vaadin.flow.component.Unit;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
@@ -12,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import static com.dario.iftv.util.Utils.createIconByGender;
 import static com.dario.iftv.util.Utils.formatBirthDate;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
+import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.END;
 import static java.lang.String.format;
 
 public class DogProfileDialog extends Dialog {
@@ -36,7 +38,11 @@ public class DogProfileDialog extends Dialog {
                 : new Image(dog.getImageUrl(), "");
         image.setWidthFull(); // TODO avoid vertical scrolling
 
-        VerticalLayout layout = new VerticalLayout(nameGenderLayout, countryBirthdayColor, image);
+        Button closeButton = new Button("Close");
+        closeButton.addClickListener(event -> close());
+
+        VerticalLayout layout = new VerticalLayout(nameGenderLayout, countryBirthdayColor, image, closeButton);
+        layout.setHorizontalComponentAlignment(END, closeButton);
         layout.setPadding(false);
 
         add(layout);

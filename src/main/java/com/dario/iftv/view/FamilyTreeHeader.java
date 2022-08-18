@@ -19,6 +19,8 @@ import static java.lang.Integer.MAX_VALUE;
 public class FamilyTreeHeader extends VerticalLayout {
 
     public FamilyTreeHeader(TreeGrid<Dog> dogGrid, Function<Integer, Void> updateTreeFunction) {
+        setPadding(false);
+
         // title
         H3 title = new H3("Ichiro Family Tree");
         title.getStyle().set("margin", "0");
@@ -50,7 +52,6 @@ public class FamilyTreeHeader extends VerticalLayout {
         HorizontalLayout row = new HorizontalLayout(generationsLayout, buttonsLayout);
 
         add(title, row);
-        setPadding(false);
     }
 
     private static List<Dog> getRootDog(TreeGrid<Dog> dogGrid) {
