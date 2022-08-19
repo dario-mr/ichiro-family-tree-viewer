@@ -26,7 +26,8 @@ jobs:
     - name: Build and create production package
       run: mvn -B clean package -Dvaadin.productionMode=true
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+# Don't really need to publish the package, it's just going to waste github storage quota
+#    - name: Publish to GitHub Packages Apache Maven
+#      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
