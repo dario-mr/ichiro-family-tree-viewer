@@ -1,8 +1,8 @@
 spring:
   application.name: ichiro-family-tree-viewer
   config.import: optional:file:.env[.properties] # enable scanning of .env file for environment variables
-server.port: ${PORT:8080} # use PORT set by Heroku, otherwise 8080
+server.port: 5000 # Elastic Beanstalk port
 
 family-tree.api:
-  url: https://ichiro-family-tree.herokuapp.com
+  url: http://ichirofamilytreeapi-env.eba-gaw6w87q.eu-central-1.elasticbeanstalk.com/
   key: ${FAMILY_TREE_API_KEY}
