@@ -4,5 +4,5 @@ spring:
 server.port: 5000 # Elastic Beanstalk port
 
 family-tree.api:
-  url: http://ichirofamilytreeapi-env.eba-gaw6w87q.eu-central-1.elasticbeanstalk.com/
+  url: http://ichirofamilytreeapi-env.eba-gaw6w87q.eu-central-1.elasticbeanstalk.com
   key: ${FAMILY_TREE_API_KEY}
