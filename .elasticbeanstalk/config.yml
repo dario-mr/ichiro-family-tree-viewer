@@ -1,4 +1,4 @@
-# deploy instructions for aws Elastic Beanstalk CLI
+# deploy instructions for aws Elastic Beanstalk CLI (currently not used)
 
 deploy:
   artifact: target/ichiro-family-tree-viewer-0.0.12.jar

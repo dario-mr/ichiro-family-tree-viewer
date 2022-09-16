@@ -50,7 +50,6 @@ public class FamilyTreeHeader extends VerticalLayout {
         HorizontalLayout buttonsLayout = new HorizontalLayout(expand, collapse);
 
         HorizontalLayout row = new HorizontalLayout(generationsLayout, buttonsLayout);
-
         add(title, row);
     }
 

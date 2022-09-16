@@ -50,7 +50,8 @@ public class FamilyTreeGrid extends TreeGrid<Dog> {
             return row;
         }).setHeader("Dog").setFlexGrow(4);
 
-        addColumn(dog -> formatBirthDate(dog.getDateOfBirth())).setHeader("Birthday");
+        addColumn(dog -> formatBirthDate(dog.getDateOfBirth())).setHeader("Birthdate");
+        addColumn(Dog::getGeneration).setHeader("Generation");
         addColumn(Dog::getColor).setHeader("Color");
 
         // on click: show dog profile

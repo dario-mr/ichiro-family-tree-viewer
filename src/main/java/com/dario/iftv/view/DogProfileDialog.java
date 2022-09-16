@@ -22,26 +22,39 @@ public class DogProfileDialog extends Dialog {
         setMinWidth(30, PERCENTAGE);
         setMaxHeight(90, PERCENTAGE);
 
+        // title
         H3 name = new H3(dog.getName());
         name.getStyle().set("margin", "0");
         Image genderIcon = createIconByGender(dog.getGender());
-        HorizontalLayout nameGenderLayout = new HorizontalLayout(name, genderIcon);
-        nameGenderLayout.setAlignItems(CENTER);
+        HorizontalLayout titleLayout = new HorizontalLayout(name, genderIcon);
+        titleLayout.setAlignItems(CENTER);
 
-        Span countryBirthdayColor = new Span(format("%s | %s | %s", dog.getCountry(), formatBirthDate(dog.getDateOfBirth()), dog.getColor()));
-        countryBirthdayColor.getStyle()
+        // subtitle
+        HorizontalLayout subtitleLayout = new HorizontalLayout();
+        subtitleLayout.getStyle()
                 .set("color", "var(--lumo-secondary-text-color)")
                 .set("font-size", "var(--lumo-font-size-m)");
+        if (dog.getCountry() != null) {
+            subtitleLayout.add(new Span(dog.getCountry()));
+        }
+        if (dog.getDateOfBirth() != null) {
+            subtitleLayout.add(new Span("|"), new Span(formatBirthDate(dog.getDateOfBirth())));
+        }
+        subtitleLayout.add(new Span("|"), new Span(format("Generation %d", dog.getGeneration())));
+        if (dog.getColor() != null) {
+            subtitleLayout.add(new Span("|"), new Span(dog.getColor()));
+        }
 
+        // dog image
         Image image = dog.getImageUrl().isBlank()
                 ? new Image("/images/img-not-found.jpg", "Image not available")
                 : new Image(dog.getImageUrl(), "");
-        // TODO avoid vertical scrolling of image
 
+        // close button
         Button closeButton = new Button("Close");
         closeButton.addClickListener(event -> close());
 
-        VerticalLayout layout = new VerticalLayout(nameGenderLayout, countryBirthdayColor, image, closeButton);
+        VerticalLayout layout = new VerticalLayout(titleLayout, subtitleLayout, image, closeButton);
         layout.setHorizontalComponentAlignment(END, closeButton);
         layout.setHorizontalComponentAlignment(CENTER, image);
         layout.setPadding(false);
