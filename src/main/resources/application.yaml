@@ -1,7 +1,7 @@
 spring:
   application.name: ichiro-family-tree-viewer
   config.import: optional:file:.env[.properties] # enable scanning of .env file for environment variables
-server.port: 8081
+server.port: 80
 
 family-tree.api:
   url: http://138.2.178.94:8080
