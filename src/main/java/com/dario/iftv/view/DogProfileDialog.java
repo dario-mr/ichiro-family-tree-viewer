@@ -46,7 +46,7 @@ public class DogProfileDialog extends Dialog {
         }
 
         // dog image
-        Image image = dog.getImageUrl().isBlank()
+        Image image = (dog.getImageUrl() == null || dog.getImageUrl().isBlank())
                 ? new Image("/images/img-not-found.jpg", "Image not available")
                 : new Image(dog.getImageUrl(), "");
 
