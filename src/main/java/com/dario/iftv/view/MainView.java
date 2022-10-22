@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import javax.annotation.PostConstruct;
 import java.util.function.Function;
 
-import static java.util.Collections.singletonList;
-
 @Route
 @PageTitle("Ichiro Family Tree")
 @RequiredArgsConstructor
@@ -23,10 +21,10 @@ public class MainView extends VerticalLayout {
         setHeightFull();
 
         FamilyTreeGrid grid = new FamilyTreeGrid();
-        grid.setRootDog(singletonList(familyTreeGateway.getFamilyTree(5)));
+        grid.setRootDog(familyTreeGateway.getFamilyTree(5));
 
         Function<Integer, Void> updateTreeFunction = generations -> {
-            grid.setRootDog(singletonList(familyTreeGateway.getFamilyTree(generations)));
+            grid.setRootDog(familyTreeGateway.getFamilyTree(generations));
             return null;
         };
         FamilyTreeHeader header = new FamilyTreeHeader(grid, updateTreeFunction);

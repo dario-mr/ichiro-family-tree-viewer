@@ -29,24 +29,18 @@ public class FamilyTreeHeader extends VerticalLayout {
         Label generationsLabel = new Label("Generations");
         IntegerField generationsInput = new IntegerField();
         generationsInput.setMin(2);
-        generationsInput.setMax(8);
+        generationsInput.setMax(6);
         generationsInput.setValue(5);
         generationsInput.setHasControls(true);
-        generationsInput.addValueChangeListener(event -> {
-            updateTreeFunction.apply(event.getValue());
-        });
+        generationsInput.addValueChangeListener(event -> updateTreeFunction.apply(event.getValue()));
         HorizontalLayout generationsLayout = new HorizontalLayout(generationsLabel, generationsInput);
         generationsLayout.setAlignItems(CENTER);
 
         // expand and collapse buttons
         Button expand = new Button("Expand All");
-        expand.addClickListener(event -> {
-            dogGrid.expandRecursively(getRootDog(dogGrid), MAX_VALUE);
-        });
+        expand.addClickListener(event -> dogGrid.expandRecursively(getRootDog(dogGrid), MAX_VALUE));
         Button collapse = new Button("Collapse All");
-        collapse.addClickListener(event -> {
-            dogGrid.collapseRecursively(getRootDog(dogGrid), MAX_VALUE);
-        });
+        collapse.addClickListener(event -> dogGrid.collapseRecursively(getRootDog(dogGrid), MAX_VALUE));
         HorizontalLayout buttonsLayout = new HorizontalLayout(expand, collapse);
 
         HorizontalLayout row = new HorizontalLayout(generationsLayout, buttonsLayout);
