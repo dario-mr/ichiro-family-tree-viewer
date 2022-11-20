@@ -6,4 +6,4 @@ spring:
 
 family-tree.api:
   url: http://138.2.178.94:8080
-  key: ${FAMILY_TREE_API_KEY}
+  key: ${IFT_API_KEY}
