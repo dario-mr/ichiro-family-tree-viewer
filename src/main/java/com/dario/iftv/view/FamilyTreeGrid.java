@@ -64,5 +64,4 @@ public class FamilyTreeGrid extends TreeGrid<Dog> {
     public void setRootDog(Dog rootDog) {
         setItems(List.of(rootDog), Dog::getParents);
     }
-
 }

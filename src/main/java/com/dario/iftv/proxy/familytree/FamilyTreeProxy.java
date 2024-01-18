@@ -53,5 +53,4 @@ public class FamilyTreeProxy implements FamilyTreeGateway {
 
         return new HttpEntity<>(requestHeader);
     }
-
 }

@@ -15,8 +15,8 @@ public class Application implements AppShellConfigurator {
         SpringApplication.run(Application.class);
     }
 
+    @Override
     public void configurePage(AppShellSettings settings) {
-        settings.addFavIcon("icon", "/images/site-icon.png", "190x190");
+        settings.addFavIcon("icon", "/images/favicon.png", "190x190");
     }
-
 }

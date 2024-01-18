@@ -6,7 +6,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.util.function.Function;
 
 @Route
@@ -31,5 +31,4 @@ public class MainView extends VerticalLayout {
 
         add(header, grid);
     }
-
 }

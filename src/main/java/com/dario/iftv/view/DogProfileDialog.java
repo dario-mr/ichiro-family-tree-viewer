@@ -61,5 +61,4 @@ public class DogProfileDialog extends Dialog {
 
         add(layout);
     }
-
 }
