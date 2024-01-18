@@ -1,10 +1,11 @@
 package com.dario.iftv.view;
 
 import com.dario.iftv.core.domain.Dog;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.littemplate.LitTemplate;
+import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.data.provider.hierarchy.TreeDataProvider;
@@ -14,31 +15,26 @@ import java.util.function.Function;
 
 import static java.lang.Integer.MAX_VALUE;
 
-public class FamilyTreeHeader extends VerticalLayout {
+@Tag("family-tree-header")
+@JsModule("./src/family-tree-header.ts")
+public class FamilyTreeHeader extends LitTemplate {
 
-    public FamilyTreeHeader(TreeGrid<Dog> dogGrid, Function<Integer, Void> updateTreeFunction) {
-        setPadding(false);
+    @Id("generations")
+    private IntegerField generations;
 
-        // title
-        H3 title = new H3("Ichiro Family Tree");
+    @Id("expand")
+    private Button expand;
 
+    @Id("collapse")
+    private Button collapse;
+
+    public FamilyTreeHeader(Function<Integer, Void> updateTreeFunction, TreeGrid<Dog> dogGrid) {
         // generations input field
-        IntegerField generationsInput = new IntegerField("Generations", 5, event -> updateTreeFunction.apply(event.getValue()));
-        generationsInput.setMin(2);
-        generationsInput.setMax(6);
-        generationsInput.setStepButtonsVisible(true);
+        generations.addValueChangeListener(event -> updateTreeFunction.apply(event.getValue()));
 
         // expand and collapse buttons
-        Button expand = new Button("Expand All");
         expand.addClickListener(event -> dogGrid.expandRecursively(getRootDog(dogGrid), MAX_VALUE));
-
-        Button collapse = new Button("Collapse All");
         collapse.addClickListener(event -> dogGrid.collapseRecursively(getRootDog(dogGrid), MAX_VALUE));
-
-        HorizontalLayout row = new HorizontalLayout(generationsInput, expand, collapse);
-        row.setAlignItems(Alignment.END);
-
-        add(title, row);
     }
 
     private static List<Dog> getRootDog(TreeGrid<Dog> dogGrid) {

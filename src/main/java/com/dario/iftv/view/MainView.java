@@ -4,9 +4,9 @@ import com.dario.iftv.core.gateway.FamilyTreeGateway;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
-import jakarta.annotation.PostConstruct;
 import java.util.function.Function;
 
 @Route
@@ -20,15 +20,17 @@ public class MainView extends VerticalLayout {
     public void init() {
         setHeightFull();
 
-        FamilyTreeGrid grid = new FamilyTreeGrid();
-        grid.setRootDog(familyTreeGateway.getFamilyTree(5));
+        var familyTreeGrid = new FamilyTreeGrid();
 
         Function<Integer, Void> updateTreeFunction = generations -> {
-            grid.setRootDog(familyTreeGateway.getFamilyTree(generations));
+            familyTreeGrid.setRootDog(familyTreeGateway.getFamilyTree(generations));
             return null;
         };
-        FamilyTreeHeader header = new FamilyTreeHeader(grid, updateTreeFunction);
 
-        add(header, grid);
+        updateTreeFunction.apply(5);    // by default, load 5 generations
+
+        var header = new FamilyTreeHeader(updateTreeFunction, familyTreeGrid);
+
+        add(header, familyTreeGrid);
     }
 }

@@ -2,8 +2,15 @@ server.port: 8081
 
 spring:
   application.name: ichiro-family-tree-viewer
-  config.import: optional:file:.env[.properties] # enable scanning of .env file for environment variables
+  profiles.active: ${IFT_PROFILE:prod}
+  config.import: optional:file:.env[.properties] # enable scanning of .env file
 
 family-tree.api:
   url: http://138.2.178.94:8080
   key: ${IFT_API_KEY}
+
+---
+spring:
+  config.activate.on-profile: dev
+vaadin.productionMode: false
+vaadin.frontend.hotdeploy: true
