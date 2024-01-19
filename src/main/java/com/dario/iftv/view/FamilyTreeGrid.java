@@ -2,6 +2,7 @@ package com.dario.iftv.view;
 
 import com.dario.iftv.core.domain.Dog;
 import com.vaadin.flow.component.avatar.Avatar;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -13,6 +14,7 @@ import static com.dario.iftv.util.Utils.createIconByGender;
 import static com.dario.iftv.util.Utils.formatBirthDate;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
 
+@CssImport(value = "./styles/grid-tree-toggle-adjust.css", themeFor = "vaadin-grid-tree-toggle")
 public class FamilyTreeGrid extends TreeGrid<Dog> {
 
     public FamilyTreeGrid() {

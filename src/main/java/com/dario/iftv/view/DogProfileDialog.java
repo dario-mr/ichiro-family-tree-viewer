@@ -54,6 +54,7 @@ public class DogProfileDialog extends Dialog {
         var closeButton = new Button("Close");
         closeButton.addClickListener(event -> close());
 
+        // complete layout
         var layout = new VerticalLayout(titleLayout, subtitleLayout, image, closeButton);
         layout.setHorizontalComponentAlignment(END, closeButton);
         layout.setHorizontalComponentAlignment(CENTER, image);

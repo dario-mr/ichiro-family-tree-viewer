@@ -1,0 +1,39 @@
+[theme~="dark"] {
+    /* Main background */
+    --lumo-base-color: #163535;
+
+    /* Primary button background. */
+    --lumo-primary-color: #7ea094;
+
+    /* Button background. Button toolbar. Secondary section */
+    --lumo-contrast-5pct: #1B4242;
+
+    /* Secondary & tertiary button text. */
+    --lumo-primary-text-color: #9EC8B9;
+
+    /* Badge background. Focused item background. */
+    --lumo-primary-color-10pct: #1B4242;
+
+    /* Focus outline color. */
+    --lumo-primary-color-50pct: #5C8374;
+}
+
+[theme~="light"] {
+    /* Main background */
+    --lumo-base-color: #E1F0DA;
+
+    /* Primary button background. */
+    --lumo-primary-color: #7ea094;
+
+    /* Button background. Button toolbar. Secondary section */
+    --lumo-contrast-5pct: #bfd0b1;
+
+    /* Secondary & tertiary button text. */
+    --lumo-primary-text-color: #374f46;
+
+    /* Badge background. Focused item background. */
+    --lumo-primary-color-10pct: #BFD8AF;
+
+    /* Focus outline color. */
+    --lumo-primary-color-50pct: #7a966a;
+}
