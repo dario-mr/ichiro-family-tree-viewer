@@ -49,6 +49,7 @@ public class DogProfileDialog extends Dialog {
         var image = (dog.getImageUrl() == null || dog.getImageUrl().isBlank())
                 ? new Image("/images/img-not-found.jpg", "Image not available")
                 : new Image(dog.getImageUrl(), "");
+        image.getStyle().set("border-radius", "var(--lumo-border-radius-l)");
 
         // close button
         var closeButton = new Button("Close");
