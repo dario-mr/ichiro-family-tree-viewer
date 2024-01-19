@@ -13,4 +13,3 @@ family-tree.api:
 spring:
   config.activate.on-profile: dev
 vaadin.productionMode: false
-vaadin.frontend.hotdeploy: true

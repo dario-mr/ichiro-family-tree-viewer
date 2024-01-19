@@ -23,14 +23,14 @@ public class DogProfileDialog extends Dialog {
         setMaxHeight(90, PERCENTAGE);
 
         // title
-        H3 name = new H3(dog.getName());
-        name.getStyle().set("margin", "0");
-        Image genderIcon = createIconByGender(dog.getGender());
-        HorizontalLayout titleLayout = new HorizontalLayout(name, genderIcon);
+        var titleLayout = new HorizontalLayout(
+                new H3(dog.getName()),
+                createIconByGender(dog.getGender())
+        );
         titleLayout.setAlignItems(CENTER);
 
         // subtitle
-        HorizontalLayout subtitleLayout = new HorizontalLayout();
+        var subtitleLayout = new HorizontalLayout();
         subtitleLayout.getStyle()
                 .set("color", "var(--lumo-secondary-text-color)")
                 .set("font-size", "var(--lumo-font-size-m)");
@@ -38,23 +38,23 @@ public class DogProfileDialog extends Dialog {
             subtitleLayout.add(new Span(dog.getCountry()));
         }
         if (dog.getDateOfBirth() != null) {
-            subtitleLayout.add(new Span("|"), new Span(formatBirthDate(dog.getDateOfBirth())));
+            subtitleLayout.add(new Span("⁃"), new Span(formatBirthDate(dog.getDateOfBirth())));
         }
-        subtitleLayout.add(new Span("|"), new Span(format("Generation %d", dog.getGeneration())));
+        subtitleLayout.add(new Span("⁃"), new Span(format("Generation %d", dog.getGeneration())));
         if (dog.getColor() != null) {
-            subtitleLayout.add(new Span("|"), new Span(dog.getColor()));
+            subtitleLayout.add(new Span("⁃"), new Span(dog.getColor()));
         }
 
         // dog image
-        Image image = (dog.getImageUrl() == null || dog.getImageUrl().isBlank())
+        var image = (dog.getImageUrl() == null || dog.getImageUrl().isBlank())
                 ? new Image("/images/img-not-found.jpg", "Image not available")
                 : new Image(dog.getImageUrl(), "");
 
         // close button
-        Button closeButton = new Button("Close");
+        var closeButton = new Button("Close");
         closeButton.addClickListener(event -> close());
 
-        VerticalLayout layout = new VerticalLayout(titleLayout, subtitleLayout, image, closeButton);
+        var layout = new VerticalLayout(titleLayout, subtitleLayout, image, closeButton);
         layout.setHorizontalComponentAlignment(END, closeButton);
         layout.setHorizontalComponentAlignment(CENTER, image);
         layout.setPadding(false);

@@ -29,7 +29,7 @@ public class MainView extends VerticalLayout {
 
         updateTreeFunction.apply(5);    // by default, load 5 generations
 
-        var header = new FamilyTreeHeader(updateTreeFunction, familyTreeGrid);
+        var header = new FamilyTreeHeader(familyTreeGrid, updateTreeFunction);
 
         add(header, familyTreeGrid);
     }
