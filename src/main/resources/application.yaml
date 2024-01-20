@@ -30,6 +30,6 @@ spring:
   datasource:
     url: jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres?prepareThreshold=0
     username: postgres.rsuhstqfoaoabfzgezxr
-    password: ma*Suk9623cDbw6ToK@TLBpLHRx!q#
+    password: ${DB_PASSWORD}
 
 vaadin.productionMode: true
