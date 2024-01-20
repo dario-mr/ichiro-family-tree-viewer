@@ -19,9 +19,4 @@ public class Utils {
                 ? ""
                 : birthDate.format(DateTimeFormatter.ofPattern("dd MMM ''yy", Locale.getDefault()));
     }
-
-    public static String getEmptyStringIfNull(String string) {
-        return string == null ? "" : string;
-    }
-
 }

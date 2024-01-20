@@ -9,11 +9,16 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.data.provider.hierarchy.TreeDataProvider;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.theme.lumo.Lumo;
+import jakarta.servlet.http.Cookie;
 
 import java.util.List;
 import java.util.function.Function;
 
+import static com.dario.iftv.core.domain.AppCookie.IS_DARK_THEME;
+import static com.dario.iftv.util.CookieUtil.getCookie;
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.MAX_VALUE;
 
 public class FamilyTreeHeader extends VerticalLayout {
@@ -33,7 +38,7 @@ public class FamilyTreeHeader extends VerticalLayout {
         title.getStyle().set("text-align", "center");
 
         // theme toggle
-        var themeToggle = new ToggleButton("Dark Mode", true);
+        var themeToggle = new ToggleButton("Dark Mode", parseBoolean(getCookie(IS_DARK_THEME)));
         themeToggle.addValueChangeListener(e -> setTheme(e.getValue()));
 
         var titleRow = new HorizontalLayout(title, themeToggle);
@@ -62,9 +67,16 @@ public class FamilyTreeHeader extends VerticalLayout {
         return generationRow;
     }
 
-    private void setTheme(boolean dark) {
+    private void setTheme(boolean isDark) {
+        // save theme cookie
+        var themeCookie = new Cookie(IS_DARK_THEME.getName(), String.valueOf(isDark));
+        themeCookie.setMaxAge(60 * 60 * 24 * 7 * 52); // 1 year in seconds
+        themeCookie.setPath("/"); // single slash means the cookie is set for your whole application
+        VaadinService.getCurrentResponse().addCookie(themeCookie);
+
+        // set theme in UI
         var js = "document.documentElement.setAttribute('theme', $0)";
-        getElement().executeJs(js, dark ? Lumo.DARK : Lumo.LIGHT);
+        getElement().executeJs(js, isDark ? Lumo.DARK : Lumo.LIGHT);
     }
 
     private static List<Dog> getRootDog(TreeGrid<Dog> dogGrid) {
