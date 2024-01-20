@@ -3,6 +3,7 @@ package com.dario.iftv.core.domain;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import static java.util.Collections.emptyList;
 
 @Builder
 @Data
-public class Dog {
+public class Dog implements Serializable {
     String name;
     String gender;
     String country;
@@ -29,5 +30,4 @@ public class Dog {
         }
         return List.of(father, mother);
     }
-
 }

@@ -1,6 +1,6 @@
 package com.dario.iftv.view;
 
-import com.dario.iftv.core.gateway.FamilyTreeGateway;
+import com.dario.iftv.core.service.FamilyTreeService;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -14,7 +14,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class MainView extends VerticalLayout {
 
-    private final FamilyTreeGateway familyTreeGateway;
+    private final FamilyTreeService familyTreeService;
 
     @PostConstruct
     public void init() {
@@ -23,7 +23,7 @@ public class MainView extends VerticalLayout {
         var familyTreeGrid = new FamilyTreeGrid();
 
         Function<Integer, Void> updateTreeFunction = generations -> {
-            familyTreeGrid.setRootDog(familyTreeGateway.getFamilyTree(generations));
+            familyTreeGrid.setRootDog(familyTreeService.getDog("Ichiro Go Takimisou", generations));
             return null;
         };
 

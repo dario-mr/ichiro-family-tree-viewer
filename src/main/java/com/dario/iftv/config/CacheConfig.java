@@ -18,15 +18,16 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching
 public class CacheConfig {
 
-    public static final String GET_FAMILY_TREE = "getFamilyTree";
+    public static final String DOG_FIND_BY_NAME = "DogRepository.findByName";
 
     @Bean
     @Primary
     public CacheManager cacheManager(Ticker ticker) {
-        SimpleCacheManager cacheManager = new SimpleCacheManager();
+        var cacheManager = new SimpleCacheManager();
         cacheManager.setCaches(List.of(
-                new CaffeineCache(GET_FAMILY_TREE, buildCache(ticker, 10, 24))
+                new CaffeineCache(DOG_FIND_BY_NAME, buildCache(ticker, 10, 24))
         ));
+
         return cacheManager;
     }
 
