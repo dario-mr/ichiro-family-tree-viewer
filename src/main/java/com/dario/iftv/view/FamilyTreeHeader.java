@@ -43,7 +43,7 @@ public class FamilyTreeHeader extends VerticalLayout {
 
         var titleRow = new HorizontalLayout(title, themeToggle);
         titleRow.setWidthFull();
-        titleRow.setFlexGrow(1, title);
+        titleRow.expand(title);
         titleRow.setAlignItems(Alignment.CENTER);
 
         return titleRow;
