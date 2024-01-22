@@ -1,6 +1,12 @@
 package com.dario.iftv.view;
 
 import com.dario.iftv.core.domain.Dog;
+import com.dario.iftv.core.service.FamilyTreeService;
+import com.dario.iftv.event.CollapseAllEvent;
+import com.dario.iftv.event.ExpandAllEvent;
+import com.dario.iftv.event.GenerationChangeEvent;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Span;
@@ -13,11 +19,16 @@ import java.util.List;
 import static com.dario.iftv.util.Utils.createIconByGender;
 import static com.dario.iftv.util.Utils.formatBirthDate;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
+import static java.lang.Integer.MAX_VALUE;
 
 @CssImport(value = "./styles/grid-tree-toggle-adjust.css", themeFor = "vaadin-grid-tree-toggle")
 public class FamilyTreeGrid extends TreeGrid<Dog> {
 
-    public FamilyTreeGrid() {
+    private final FamilyTreeService familyTreeService;
+
+    public FamilyTreeGrid(FamilyTreeService familyTreeService) {
+        this.familyTreeService = familyTreeService;
+
         // columns
         addComponentHierarchyColumn(dog -> {
             var nameGenderLayout = new HorizontalLayout(
@@ -53,9 +64,38 @@ public class FamilyTreeGrid extends TreeGrid<Dog> {
             var dogProfile = new DogProfileDialog(event.getItem());
             dogProfile.open();
         });
+
+        // load ichiro and 5 generations in the grid
+        setRootDog(this.familyTreeService.getDog("Ichiro Go Takimisou", 5));
     }
 
-    public void setRootDog(Dog rootDog) {
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+
+        // "generation changed" event -> load the new number of generations in the grid
+        ComponentUtil.addListener(
+                attachEvent.getUI(),
+                GenerationChangeEvent.class,
+                event -> setRootDog(familyTreeService.getDog("Ichiro Go Takimisou", event.getGenerations()))
+        );
+
+        // "expand all" event
+        ComponentUtil.addListener(
+                attachEvent.getUI(),
+                ExpandAllEvent.class,
+                event -> expandRecursively(getTreeData().getRootItems(), MAX_VALUE)
+        );
+
+        // "collapse all" event
+        ComponentUtil.addListener(
+                attachEvent.getUI(),
+                CollapseAllEvent.class,
+                event -> collapseRecursively(getTreeData().getRootItems(), MAX_VALUE)
+        );
+    }
+
+    private void setRootDog(Dog rootDog) {
         setItems(List.of(rootDog), Dog::getParents);
     }
 }

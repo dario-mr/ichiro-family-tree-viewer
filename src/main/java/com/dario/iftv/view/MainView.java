@@ -9,8 +9,6 @@ import com.vaadin.flow.theme.lumo.Lumo;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
-import java.util.function.Function;
-
 import static com.dario.iftv.core.domain.Setting.IS_DARK_THEME;
 import static java.lang.Boolean.parseBoolean;
 
@@ -26,18 +24,10 @@ public class MainView extends VerticalLayout {
         setHeightFull();
         setTheme();
 
-        var familyTreeGrid = new FamilyTreeGrid();
-
-        Function<Integer, Void> updateTreeFunction = generations -> {
-            familyTreeGrid.setRootDog(familyTreeService.getDog("Ichiro Go Takimisou", generations));
-            return null;
-        };
-
-        updateTreeFunction.apply(5);    // by default, load 5 generations
-
-        var header = new FamilyTreeHeader(familyTreeGrid, updateTreeFunction);
-
-        add(header, familyTreeGrid);
+        add(
+                new FamilyTreeHeader(),
+                new FamilyTreeGrid(familyTreeService)
+        );
     }
 
     private void setTheme() {
