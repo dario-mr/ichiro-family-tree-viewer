@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum AppCookie {
+public enum Setting {
 
     IS_DARK_THEME("isDarkTheme", "true");
 

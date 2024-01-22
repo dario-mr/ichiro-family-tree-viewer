@@ -6,18 +6,16 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.WebStorage;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.data.provider.hierarchy.TreeDataProvider;
-import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.theme.lumo.Lumo;
-import jakarta.servlet.http.Cookie;
 
 import java.util.List;
 import java.util.function.Function;
 
-import static com.dario.iftv.core.domain.AppCookie.IS_DARK_THEME;
-import static com.dario.iftv.util.CookieUtil.getCookie;
+import static com.dario.iftv.core.domain.Setting.IS_DARK_THEME;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.MAX_VALUE;
 
@@ -38,8 +36,7 @@ public class FamilyTreeHeader extends VerticalLayout {
         title.getStyle().set("text-align", "center");
 
         // theme toggle
-        var themeToggle = new ToggleButton("Dark Mode", parseBoolean(getCookie(IS_DARK_THEME)));
-        themeToggle.addValueChangeListener(e -> setTheme(e.getValue()));
+        var themeToggle = buildThemeToggle();
 
         var titleRow = new HorizontalLayout(title, themeToggle);
         titleRow.setWidthFull();
@@ -47,6 +44,21 @@ public class FamilyTreeHeader extends VerticalLayout {
         titleRow.setAlignItems(Alignment.CENTER);
 
         return titleRow;
+    }
+
+    private ToggleButton buildThemeToggle() {
+        var themeToggle = new ToggleButton("Dark Mode", parseBoolean(IS_DARK_THEME.getDefaultValue()));
+        themeToggle.addValueChangeListener(e -> setTheme(e.getValue()));
+
+        // load theme setting and apply it to the theme toggle
+        WebStorage.getItem(IS_DARK_THEME.getName(), value -> {
+            var isDarkTheme = value == null
+                    ? parseBoolean(IS_DARK_THEME.getDefaultValue())
+                    : parseBoolean(value);
+            themeToggle.setValue(isDarkTheme);
+        });
+
+        return themeToggle;
     }
 
     private static HorizontalLayout buildGenerationRow(TreeGrid<Dog> dogGrid, Function<Integer, Void> updateTreeFunction) {
@@ -68,11 +80,8 @@ public class FamilyTreeHeader extends VerticalLayout {
     }
 
     private void setTheme(boolean isDark) {
-        // save theme cookie
-        var themeCookie = new Cookie(IS_DARK_THEME.getName(), String.valueOf(isDark));
-        themeCookie.setMaxAge(60 * 60 * 24 * 7 * 52); // 1 year in seconds
-        themeCookie.setPath("/"); // single slash means the cookie is set for your whole application
-        VaadinService.getCurrentResponse().addCookie(themeCookie);
+        // save isDark setting in local storage
+        WebStorage.setItem(IS_DARK_THEME.getName(), String.valueOf(isDark));
 
         // set theme in UI
         var js = "document.documentElement.setAttribute('theme', $0)";

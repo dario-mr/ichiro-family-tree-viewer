@@ -2,6 +2,7 @@ package com.dario.iftv.view;
 
 import com.dario.iftv.core.service.FamilyTreeService;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.WebStorage;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -10,8 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.function.Function;
 
-import static com.dario.iftv.core.domain.AppCookie.IS_DARK_THEME;
-import static com.dario.iftv.util.CookieUtil.getCookie;
+import static com.dario.iftv.core.domain.Setting.IS_DARK_THEME;
 import static java.lang.Boolean.parseBoolean;
 
 @Route
@@ -41,9 +41,13 @@ public class MainView extends VerticalLayout {
     }
 
     private void setTheme() {
-        var isDarkTheme = parseBoolean(getCookie(IS_DARK_THEME));
-        var js = "document.documentElement.setAttribute('theme', $0)";
+        WebStorage.getItem(IS_DARK_THEME.getName(), value -> {
+            var isDarkTheme = value == null
+                    ? parseBoolean(IS_DARK_THEME.getDefaultValue())
+                    : parseBoolean(value);
+            var js = "document.documentElement.setAttribute('theme', $0)";
 
-        getElement().executeJs(js, isDarkTheme ? Lumo.DARK : Lumo.LIGHT);
+            getElement().executeJs(js, isDarkTheme ? Lumo.DARK : Lumo.LIGHT);
+        });
     }
 }
