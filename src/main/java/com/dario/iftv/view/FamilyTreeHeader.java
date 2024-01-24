@@ -3,11 +3,12 @@ package com.dario.iftv.view;
 import com.dario.iftv.event.CollapseAllEvent;
 import com.dario.iftv.event.ExpandAllEvent;
 import com.dario.iftv.event.GenerationChangeEvent;
-import com.vaadin.componentfactory.ToggleButton;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.WebStorage;
@@ -15,17 +16,14 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.theme.lumo.Lumo;
 
 import static com.dario.iftv.core.domain.Setting.IS_DARK_THEME;
+import static com.vaadin.flow.component.Unit.EM;
 import static java.lang.Boolean.parseBoolean;
 
 public class FamilyTreeHeader extends VerticalLayout {
 
     public FamilyTreeHeader() {
         setPadding(false);
-
-        var titleRow = buildTitleRow();
-        var generationRow = buildGenerationRow();
-
-        add(titleRow, generationRow);
+        add(buildTitleRow(), buildGenerationRow());
     }
 
     private HorizontalLayout buildTitleRow() {
@@ -33,10 +31,12 @@ public class FamilyTreeHeader extends VerticalLayout {
         var title = new H2("Ichiro Family Tree");
         title.getStyle().set("text-align", "center");
 
-        // theme toggle
-        var themeToggle = buildThemeToggle();
+        // theme icons
+        var sunIcon = VaadinIcon.SUN_O.create();
+        var moonIcon = VaadinIcon.MOON_O.create();
+        configureThemeIcons(sunIcon, moonIcon);
 
-        var titleRow = new HorizontalLayout(title, themeToggle);
+        var titleRow = new HorizontalLayout(title, sunIcon, moonIcon);
         titleRow.setWidthFull();
         titleRow.expand(title);
         titleRow.setAlignItems(Alignment.CENTER);
@@ -44,24 +44,42 @@ public class FamilyTreeHeader extends VerticalLayout {
         return titleRow;
     }
 
-    private ToggleButton buildThemeToggle() {
-        var themeToggle = new ToggleButton("Dark Mode", parseBoolean(IS_DARK_THEME.getDefaultValue()));
-        themeToggle.addValueChangeListener(e -> setTheme(e.getValue()));
+    private void configureThemeIcons(Icon sunIcon, Icon moonIcon) {
+        // by default, hide both icons
+        sunIcon.setVisible(false);
+        moonIcon.setVisible(false);
 
-        // load theme setting and apply it to the theme toggle
+        // add listeners to switch theme
+        sunIcon.addClickListener(e -> {
+            sunIcon.setVisible(false);
+            moonIcon.setVisible(true);
+            setTheme(true);
+        });
+        moonIcon.addClickListener(e -> {
+            sunIcon.setVisible(true);
+            moonIcon.setVisible(false);
+            setTheme(false);
+        });
+
+        // load theme setting and show the right theme icon
         WebStorage.getItem(IS_DARK_THEME.getName(), value -> {
             var isDarkTheme = value == null
                     ? parseBoolean(IS_DARK_THEME.getDefaultValue())
                     : parseBoolean(value);
-            themeToggle.setValue(isDarkTheme);
+            if (isDarkTheme) {
+                sunIcon.setVisible(false);
+                moonIcon.setVisible(true);
+            } else {
+                sunIcon.setVisible(true);
+                moonIcon.setVisible(false);
+            }
         });
-
-        return themeToggle;
     }
 
     private HorizontalLayout buildGenerationRow() {
         // generations input field
         var generationsInput = new IntegerField("Generations");
+        generationsInput.setWidth(8, EM);
         generationsInput.setValue(5);
         generationsInput.setMin(2);
         generationsInput.setMax(6);
