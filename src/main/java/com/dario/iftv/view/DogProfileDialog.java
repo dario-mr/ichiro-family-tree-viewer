@@ -3,6 +3,7 @@ package com.dario.iftv.view;
 import com.dario.iftv.core.domain.Dog;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
@@ -12,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import static com.dario.iftv.util.Utils.createIconByGender;
 import static com.dario.iftv.util.Utils.formatBirthDate;
 import static com.vaadin.flow.component.Unit.PERCENTAGE;
+import static com.vaadin.flow.component.html.AnchorTarget.BLANK;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.END;
 import static java.lang.String.format;
@@ -44,6 +46,7 @@ public class DogProfileDialog extends Dialog {
         if (dog.getColor() != null) {
             subtitleLayout.add(new Span("⁃"), new Span(dog.getColor()));
         }
+        subtitleLayout.add(new Span("⁃"), new Anchor(dog.getProfileUrl(), "Pedigree", BLANK));
 
         // dog image
         var image = (dog.getImageUrl() == null || dog.getImageUrl().isBlank())
