@@ -1,5 +1,6 @@
 # Ichiro Family Tree Viewer
 
 ## Environment variables
-- `IFT_PROFILE`: spring profile used to run the app, either `dev` or `prod`. Default: `prod`.
-- `DB_PASSWORD`: database password.
+- `IFT_PROFILE`: spring profile used to run the app, either `dev` or `prod` (default: `prod`)
+- `PORT`: Server port (default: `8082`)
+- `DB_PASSWORD`: Database password (default: `<empty>`)
