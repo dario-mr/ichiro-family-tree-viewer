@@ -37,3 +37,21 @@
     /* Focus outline color. */
     --lumo-primary-color-50pct: #7a966a;
 }
+
+[theme~="dark"] .headline {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    background: -webkit-linear-gradient(120deg, #9affb0 30%, #41d1ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[theme~="light"] .headline {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    background: -webkit-linear-gradient(120deg, #7da6e7 30%, #035b00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

@@ -1,8 +1,8 @@
-package com.dario.iftv.core.repository;
+package com.dario.iftv.repository;
 
 import com.dario.iftv.core.domain.Dog;
-import com.dario.iftv.core.repository.jpa.DogJpaRepository;
-import com.dario.iftv.core.repository.jpa.entity.DogEntity;
+import com.dario.iftv.repository.jpa.DogJpaRepository;
+import com.dario.iftv.repository.jpa.entity.DogEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;

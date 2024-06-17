@@ -1,4 +1,4 @@
-package com.dario.iftv.core.repository.jpa.entity;
+package com.dario.iftv.repository.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

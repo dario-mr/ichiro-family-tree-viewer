@@ -17,6 +17,8 @@ import com.vaadin.flow.theme.lumo.Lumo;
 
 import static com.dario.iftv.core.domain.Setting.IS_DARK_THEME;
 import static com.vaadin.flow.component.Unit.EM;
+import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
+import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.END;
 import static java.lang.Boolean.parseBoolean;
 
 public class FamilyTreeHeader extends VerticalLayout {
@@ -29,7 +31,7 @@ public class FamilyTreeHeader extends VerticalLayout {
     private HorizontalLayout buildTitleRow() {
         // title
         var title = new H2("Ichiro Family Tree");
-        title.getStyle().set("text-align", "center");
+        title.addClassName("headline");
 
         // theme icons
         var sunIcon = VaadinIcon.SUN_O.create();
@@ -39,7 +41,7 @@ public class FamilyTreeHeader extends VerticalLayout {
         var titleRow = new HorizontalLayout(title, sunIcon, moonIcon);
         titleRow.setWidthFull();
         titleRow.expand(title);
-        titleRow.setAlignItems(Alignment.CENTER);
+        titleRow.setAlignItems(CENTER);
 
         return titleRow;
     }
@@ -89,17 +91,26 @@ public class FamilyTreeHeader extends VerticalLayout {
 
         // expand and collapse buttons
         var expandAll = new Button("Expand All");
-        expandAll.addClickListener(event -> ComponentUtil.fireEvent(UI.getCurrent(), new ExpandAllEvent(expandAll)));
-
         var collapseAll = new Button("Collapse All");
-        collapseAll.addClickListener(event -> ComponentUtil.fireEvent(UI.getCurrent(), new CollapseAllEvent(collapseAll)));
+        collapseAll.setVisible(false);
+
+        expandAll.addClickListener(event -> {
+            expandAll.setVisible(false);
+            collapseAll.setVisible(true);
+            ComponentUtil.fireEvent(UI.getCurrent(), new ExpandAllEvent(expandAll));
+        });
+        collapseAll.addClickListener(event -> {
+            expandAll.setVisible(true);
+            collapseAll.setVisible(false);
+            ComponentUtil.fireEvent(UI.getCurrent(), new CollapseAllEvent(collapseAll));
+        });
 
         var generationRow = new HorizontalLayout(
                 generationsInput,
                 expandAll,
                 collapseAll
         );
-        generationRow.setAlignItems(Alignment.END);
+        generationRow.setAlignItems(END);
 
         return generationRow;
     }

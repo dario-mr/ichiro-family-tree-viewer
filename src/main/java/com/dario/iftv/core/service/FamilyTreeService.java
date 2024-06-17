@@ -1,7 +1,7 @@
 package com.dario.iftv.core.service;
 
 import com.dario.iftv.core.domain.Dog;
-import com.dario.iftv.core.repository.DogRepository;
+import com.dario.iftv.repository.DogRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.SerializationUtils;
