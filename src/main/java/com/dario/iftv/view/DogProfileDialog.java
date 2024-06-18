@@ -13,7 +13,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import static com.dario.iftv.util.Utils.createIconByGender;
 import static com.dario.iftv.util.Utils.formatBirthDate;
-import static com.vaadin.flow.component.Unit.PERCENTAGE;
 import static com.vaadin.flow.component.html.AnchorTarget.BLANK;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.END;
@@ -23,9 +22,6 @@ import static java.lang.String.format;
 public class DogProfileDialog extends Dialog {
 
     public DogProfileDialog(Dog dog) {
-        setMinWidth(30, PERCENTAGE);
-        setMaxHeight(90, PERCENTAGE);
-
         // title
         var titleLayout = new HorizontalLayout(
                 new H3(dog.getName()),
