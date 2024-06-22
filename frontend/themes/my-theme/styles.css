@@ -1,57 +1,33 @@
 [theme~="dark"] {
-    /* Main background */
     --lumo-base-color: #163535;
-
-    /* Primary button background. */
     --lumo-primary-color: #7ea094;
-
-    /* Button background. Button toolbar. Secondary section */
     --lumo-contrast-5pct: #1B4242;
-
-    /* Secondary & tertiary button text. */
     --lumo-primary-text-color: #9EC8B9;
-
-    /* Badge background. Focused item background. */
     --lumo-primary-color-10pct: #1B4242;
-
-    /* Focus outline color. */
     --lumo-primary-color-50pct: #5C8374;
 }
 
 [theme~="light"] {
-    /* Main background */
     --lumo-base-color: #E1F0DA;
-
-    /* Primary button background. */
     --lumo-primary-color: #7ea094;
-
-    /* Button background. Button toolbar. Secondary section */
     --lumo-contrast-5pct: #bfd0b1;
-
-    /* Secondary & tertiary button text. */
     --lumo-primary-text-color: #374f46;
-
-    /* Badge background. Focused item background. */
     --lumo-primary-color-10pct: #BFD8AF;
-
-    /* Focus outline color. */
     --lumo-primary-color-50pct: #7a966a;
 }
 
-[theme~="dark"] .headline {
+.headline {
     font-family: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: 700;
-    background: -webkit-linear-gradient(120deg, #9affb0 30%, #41d1ff);
-    background-clip: text;
-    -webkit-background-clip: text;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent;
 }
 
+[theme~="dark"] .headline {
+    background: -webkit-linear-gradient(120deg, #9affb0 30%, #41d1ff);
+}
+
 [theme~="light"] .headline {
-    font-family: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: 700;
     background: -webkit-linear-gradient(120deg, #7da6e7 30%, #035b00);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }

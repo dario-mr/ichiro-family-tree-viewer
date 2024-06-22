@@ -60,7 +60,7 @@ public class FamilyTreeGrid extends TreeGrid<Dog> {
 
         // on click: show dog profile
         addItemClickListener(event -> {
-            var dogProfile = new DogProfileDialog(event.getItem());
+            var dogProfile = new DogProfile(event.getItem());
             dogProfile.open();
         });
 
