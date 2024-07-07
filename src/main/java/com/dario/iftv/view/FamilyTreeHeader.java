@@ -19,6 +19,7 @@ import static com.dario.iftv.core.domain.Setting.IS_DARK_THEME;
 import static com.vaadin.flow.component.Unit.EM;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.CENTER;
 import static com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.END;
+import static com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode.BETWEEN;
 import static java.lang.Boolean.parseBoolean;
 
 public class FamilyTreeHeader extends VerticalLayout {
@@ -40,8 +41,8 @@ public class FamilyTreeHeader extends VerticalLayout {
 
         var titleRow = new HorizontalLayout(title, sunIcon, moonIcon);
         titleRow.setWidthFull();
-        titleRow.expand(title);
         titleRow.setAlignItems(CENTER);
+        titleRow.setJustifyContentMode(BETWEEN);
 
         return titleRow;
     }
