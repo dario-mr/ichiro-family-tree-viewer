@@ -8,6 +8,7 @@
 node_modules/
 frontend/generated/
 frontend/index.html
+src/main/bundles
 
 /package-lock.json
 /webpack.config.js
