@@ -1,4 +1,6 @@
-server.port: ${PORT:8081} # read port from render.com, or use default 8081
+server:
+  port: ${PORT:8081}
+  forward-headers-strategy: framework # honor the original external request context (host, scheme, prefix)
 
 spring:
   application.name: ichiro-family-tree-viewer

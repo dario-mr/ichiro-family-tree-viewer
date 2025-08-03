@@ -10,8 +10,8 @@ public class Utils {
 
     public static Image createIconByGender(String gender) {
         return gender.equals("Male")
-                ? new Image("/images/male-icon.png", gender)
-                : new Image("/images/female-icon.png", gender);
+                ? new Image(PathResolver.resolve("/images/male-icon.png"), gender)
+                : new Image(PathResolver.resolve("/images/female-icon.png"), gender);
     }
 
     public static String formatBirthDate(LocalDate birthDate) {

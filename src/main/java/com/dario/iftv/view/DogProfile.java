@@ -1,6 +1,7 @@
 package com.dario.iftv.view;
 
 import com.dario.iftv.core.domain.Dog;
+import com.dario.iftv.util.PathResolver;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -28,7 +29,7 @@ public class DogProfile extends Dialog {
     public DogProfile(Dog dog) {
         // dog image
         var dogImage = (dog.getImageUrl() == null || dog.getImageUrl().isBlank())
-                ? new Image("/images/img-not-found.jpg", "Image not available")
+                ? new Image(PathResolver.resolve("/images/img-not-found.jpg"), "Image not available")
                 : new Image(dog.getImageUrl(), "");
         dogImage.getStyle().set("object-fit", "contain");
         dogImage.setWidthFull();
