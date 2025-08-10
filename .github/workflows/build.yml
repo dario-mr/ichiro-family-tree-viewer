@@ -24,9 +24,14 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
+          cache-dependency-path: |
+            **/pom.xml
 
-      - name: Run tests
-        run: mvn --batch-mode test
+      - name: Go offline
+        run: mvn -B -q -DskipTests dependency:go-offline
+
+      - name: Run tests (offline mode)
+        run: mvn -B -o test
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
