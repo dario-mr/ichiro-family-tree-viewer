@@ -47,3 +47,5 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: dariomr8/ichiro:latest
+          cache-from: type=registry,ref=dariomr8/ichiro:buildcache
+          cache-to: type=registry,ref=dariomr8/ichiro:buildcache,mode=max
