@@ -7,10 +7,9 @@
 .env
 node_modules/
 frontend/generated/
-frontend/index.html
 src/main/bundles
+src/main/frontend/generated
 
-/package-lock.json
 /webpack.config.js
 /webpack.generated.js
 vite.generated.ts
